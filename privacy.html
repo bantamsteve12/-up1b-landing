@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — UP/1B Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0E14;
+    --surface: #0F1117;
+    --card: #13151E;
+    --card2: #1A1D2A;
+    --border: #252840;
+    --accent: #FF6B1A;
+    --accent-glow: rgba(255,107,26,0.28);
+    --accent-soft: rgba(255,107,26,0.12);
+    --accent-border: rgba(255,107,26,0.3);
+    --green: #22C55E;
+    --white: #fff;
+    --text: #E6E8F0;
+    --grey1: rgba(230,232,240,0.85);
+    --grey2: #7880A0;
+    --font: 'Sora', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: var(--font); font-size: 16px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 62px; background: rgba(12,14,20,0.88); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-back { font-size: 13px; color: var(--grey2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--white); }
+  .nav-back svg { width: 14px; height: 14px; }
+
+  /* HERO */
+  .hero { padding: 120px 5vw 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,107,26,0.08) 0%, transparent 70%); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; position: relative; z-index: 1; margin-bottom: 16px; }
+  .hero p { font-size: 15px; color: var(--grey2); position: relative; z-index: 1; }
+
+  /* CONTENT */
+  .content { max-width: 760px; margin: 0 auto; padding: 0 5vw 100px; }
+
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 48px; }
+  .toc h2 { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .toc ol { padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .toc ol li a { font-size: 14px; color: var(--grey1); text-decoration: none; transition: color 0.2s; }
+  .toc ol li a:hover { color: var(--accent); }
+
+  .section { margin-bottom: 48px; scroll-margin-top: 80px; }
+  .section h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section h2 .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+  .section p { font-size: 15px; color: var(--grey1); margin-bottom: 12px; }
+  .section p:last-child { margin-bottom: 0; }
+
+  .highlight-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  .highlight-box.green { border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.06); }
+  .highlight-box p { margin: 0; font-size: 14px; color: var(--grey1); }
+  .highlight-box strong { color: var(--white); }
+
+  ul.list { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+  ul.list li { font-size: 15px; color: var(--grey1); padding-left: 20px; position: relative; }
+  ul.list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+  .contact-box { background: var(--card2); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-top: 48px; text-align: center; }
+  .contact-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .contact-box p { font-size: 14px; color: var(--grey2); margin-bottom: 16px; }
+  .contact-box a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 15px; }
+  .contact-box a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 32px 5vw; text-align: center; }
+  footer p { font-size: 13px; color: var(--grey2); }
+  footer a { color: var(--grey2); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">UP<span>/</span>1B Calculator</a>
+  <a class="nav-back" href="/">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p>Last updated: 20 April 2026</p>
+</div>
+
+<div class="content">
+
+  <div class="highlight-box green">
+    <p><strong>The short version:</strong> UP/1B Calculator requires an account to use. Completed test summaries are securely stored to let you access your records across devices. We do not use your data for advertising or tracking, and we do not share it with third parties.</p>
+  </div>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1">Who we are</a></li>
+      <li><a href="#s2">What data we collect</a></li>
+      <li><a href="#s3">Data stored on your device</a></li>
+      <li><a href="#s4">PDF certificates</a></li>
+      <li><a href="#s5">Purchases</a></li>
+      <li><a href="#s6">Analytics &amp; tracking</a></li>
+      <li><a href="#s7">Third-party services</a></li>
+      <li><a href="#s8">Children's privacy</a></li>
+      <li><a href="#s9">Your rights</a></li>
+      <li><a href="#s10">Changes to this policy</a></li>
+      <li><a href="#s11">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <h2><span class="num">1</span>Who we are</h2>
+    <p>UP/1B Calculator is developed and published by Gas Installers Workmate Ltd, based in the United Kingdom.</p>
+    <p>This privacy policy applies to the UP/1B Calculator mobile application available on the Apple App Store and Google Play Store.</p>
+  </div>
+
+  <div class="section" id="s2">
+    <h2><span class="num">2</span>What data we collect</h2>
+    <p>The app requires you to create an account in order to use it. This allows your completed test records to be securely stored and accessed across multiple devices.</p>
+    <p>The following information is collected and stored on our servers:</p>
+    <ul class="list">
+      <li>Your account credentials (email address and encrypted password)</li>
+      <li>A summary of each completed tightness test (fuel type, installation volume, test pressures, pass/fail result, date, and job reference)</li>
+    </ul>
+    <p>This data is collected solely to provide the core functionality of the app — specifically to allow you to view and manage your test records across devices. We do not use this data for advertising, profiling, or any other purpose.</p>
+    <p>Detailed in-progress job data (such as individual pipe section entries during a test) is held locally on your device only and is not transmitted to our servers.</p>
+  </div>
+
+
+
+  <div class="section" id="s4">
+    <h2><span class="num">4</span>PDF certificates</h2>
+    <p>The app generates Gas Tightness Test Certificates as PDF files. These PDFs are created entirely on your device and saved to your device's local storage or shared via your device's standard share sheet (e.g. email, AirDrop, Files).</p>
+    <p>We do not receive, store, or have any access to any PDF certificates you generate.</p>
+  </div>
+
+  <div class="section" id="s5">
+    <h2><span class="num">5</span>Purchases</h2>
+    <p>The app is sold as a one-time purchase through the Apple App Store and Google Play Store. All payment processing is handled entirely by Apple and Google respectively. We do not receive or store any payment card details.</p>
+    <p>Please refer to Apple's and Google's privacy policies for information on how they handle purchase data.</p>
+  </div>
+
+  <div class="section" id="s6">
+    <h2><span class="num">6</span>Analytics &amp; tracking</h2>
+    <p>The app does not use any analytics, crash reporting, or tracking SDKs. We do not use cookies or any equivalent tracking technology. We do not build user profiles or track behaviour in any form.</p>
+  </div>
+
+  <div class="section" id="s7">
+    <h2><span class="num">7</span>Third-party services</h2>
+    <p>The app does not integrate with any third-party services, advertising networks, or social platforms. No data is shared with any third party by us.</p>
+    <p>The app stores are operated by Apple and Google, and their own privacy policies govern the distribution of the app. Links to these are provided below:</p>
+    <ul class="list">
+      <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener" style="color:var(--accent)">Apple Privacy Policy</a></li>
+      <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Google Privacy Policy</a></li>
+    </ul>
+  </div>
+
+  <div class="section" id="s8">
+    <h2><span class="num">8</span>Children's privacy</h2>
+    <p>UP/1B Calculator is a professional tool intended for use by qualified gas engineers. It is not directed at or intended for use by anyone under the age of 18. We do not knowingly collect any information from children.</p>
+  </div>
+
+  <div class="section" id="s9">
+    <h2><span class="num">9</span>Your rights</h2>
+    <p>As a user based in the UK or EEA, you have the following rights regarding your personal data:</p>
+    <ul class="list">
+      <li><strong style="color:var(--white)">Right of access</strong> — you can request a copy of the data we hold about you</li>
+      <li><strong style="color:var(--white)">Right to rectification</strong> — you can ask us to correct inaccurate data</li>
+      <li><strong style="color:var(--white)">Right to erasure</strong> — you can request that we delete your account and all associated test records</li>
+      <li><strong style="color:var(--white)">Right to portability</strong> — you can request a copy of your data in a portable format</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at the address in section 11. We will respond within 30 days.</p>
+  </div>
+
+  <div class="section" id="s10">
+    <h2><span class="num">10</span>Changes to this policy</h2>
+    <p>If we make material changes to this privacy policy, we will update the "Last updated" date at the top of this page and, where appropriate, notify users via an app update.</p>
+    <p>Continued use of the app after any changes constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="section" id="s11">
+    <h2><span class="num">11</span>Contact</h2>
+    <p>If you have any questions about this privacy policy or the app's handling of data, please get in touch:</p>
+    <div class="contact-box">
+      <h3>Gas Installers Workmate Ltd</h3>
+      <p>West Yorkshire, United Kingdom</p>
+      <a href="mailto:support@up1bcalculator.com">support@up1bcalculator.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="/">UP/1B Calculator</a> &nbsp;·&nbsp; &copy; 2026 Gas Installers Workmate Ltd &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
