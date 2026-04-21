@@ -322,6 +322,139 @@
 </head>
 <body>
 
+<!-- COUNTDOWN BANNER -->
+<style>
+  .countdown-banner {
+    background: linear-gradient(135deg, #1a0f00 0%, #2a1500 50%, #1a0f00 100%);
+    border-bottom: 1px solid rgba(255,107,26,0.4);
+    padding: 10px 5vw;
+    text-align: center;
+    position: relative;
+    z-index: 101;
+  }
+  .countdown-banner-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .countdown-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+  }
+  .countdown-message {
+    font-size: 13px;
+    color: rgba(230,232,240,0.8);
+    line-height: 1.5;
+  }
+  .countdown-message strong { color: #fff; }
+  .countdown-message .transition-pill {
+    display: inline-block;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.4);
+    color: #F59E0B;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .countdown-timer {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  .cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .cd-num {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 40px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--grey2);
+  }
+  .cd-sep {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(255,107,26,0.4);
+    margin-bottom: 12px;
+  }
+  @media (max-width: 600px) {
+    .countdown-message { font-size: 12px; }
+    .cd-num { font-size: 18px; }
+  }
+</style>
+
+<div class="countdown-banner">
+  <div class="countdown-banner-inner">
+    <div class="countdown-label">⚠ Edition 4 Mandatory Deadline</div>
+    <div class="countdown-timer">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">Hours</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Mins</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Secs</span></div>
+    </div>
+    <div class="countdown-message">
+      <strong>IGEM/UP/1B Edition 4 must be followed from 1st October 2026.</strong>
+      Edition 3 is withdrawn on 30th September 2026.
+      <span class="transition-pill">Transition period now active</span>
+    </div>
+    <div class="countdown-message" style="font-size:12px; color: var(--grey2);">
+      The transition period runs from <strong style="color:#fff">25th March 2026</strong> to <strong style="color:#fff">30th September 2026</strong> — Edition 4 is already in effect and engineers are encouraged to adopt it now.
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const deadline = new Date('2026-10-01T00:00:00');
+    function update() {
+      const now = new Date();
+      const diff = deadline - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById('cd-days').textContent = days;
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+</script>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#"><span>UP/1B</span> Calculator</a>
@@ -402,7 +535,7 @@
           <li><span class="ci">✓</span>Live calculations with instant pass/fail result</li>
           <li><span class="ci">✓</span>Correct Edition 4 figures, always up to date</li>
           <li><span class="ci">✓</span>Works offline on site, syncs results to the cloud</li>
-          <li><span class="ci">✓</span>Exportable result summary for your certificate</li>
+          <li><span class="ci">✓</span>Exportable result summary for your record</li>
           <li><span class="ci">✓</span>Done in minutes. Documented. Defensible.</li>
         </ul>
       </div>
@@ -419,7 +552,7 @@
   <div class="features-grid">
     <div class="feature-card reveal">
       <div class="feature-icon">📐</div>
-      <h3>Live Pressure Calculations</h3>
+      <h3>Pressure Calculations</h3>
       <p>Enter your readings and the app instantly calculates test pressures, permissible pressure drops, and stabilisation times — all in line with IGEM/UP/1B Edition 4.</p>
     </div>
     <div class="feature-card reveal">
@@ -440,7 +573,7 @@
     <div class="feature-card reveal">
       <div class="feature-icon">📄</div>
       <h3>Exportable Results</h3>
-      <p>Generate a clean summary of your test results to attach to your gas safety certificate or keep for your own records. Perfect for commercial compliance jobs.</p>
+      <p>Generate a clean summary of your test results to attach to your gas safety record or keep for your own records. Perfect for commercial compliance jobs.</p>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🏗️</div>
@@ -450,32 +583,6 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
-  <div class="how-inner">
-    <div class="reveal">
-      <div class="section-label">How It Works</div>
-      <div class="section-title">Three steps to a <em>documented result.</em></div>
-    </div>
-    <div class="steps-grid">
-      <div class="step reveal">
-        <div class="step-number">01 — Select</div>
-        <h3>Choose your procedure</h3>
-        <p>Select whether you're carrying out a tightness test, a purging operation, or both. The app loads the correct IGEM/UP/1B sequence automatically.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">02 — Enter</div>
-        <h3>Input your readings</h3>
-        <p>Enter working pressure, pipe volume, and live gauge readings as prompted. The app calculates permissible drop values and test durations in real time.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">03 — Record</div>
-        <h3>Get your result</h3>
-        <p>Receive a clear pass/fail assessment compliant with Edition 4. Export a summary to attach to your certificate or share directly with your customer.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- SCREENSHOTS -->
 <section class="screenshots" id="screenshots">
@@ -483,7 +590,7 @@
     <div class="reveal">
       <div class="section-label">See It In Action</div>
       <div class="section-title">Every step. <em>Every detail.</em></div>
-      <p class="screenshots-sub">Eight guided steps take you from setup to a signed PDF certificate — nothing missed, nothing guessed.</p>
+      <p class="screenshots-sub">Eight guided steps take you from setup to a signed PDF record — nothing missed, nothing guessed.</p>
     </div>
     <div class="screens-scroll reveal">
       <div class="screen-item">
@@ -558,12 +665,12 @@
       </div>
       <div class="screen-item">
         <div class="screen-frame cert-frame">
-          <img src="screen8.png" alt="PDF Certificate">
+          <img src="screen8.png" alt="PDF Record">
         </div>
         <div class="screen-label">
-          <span class="screen-step screen-step-green">Certificate</span>
-          <span class="screen-title">PDF Certificate</span>
-          <span class="screen-desc">Professional Gas Tightness Test Certificate generated instantly — ready to share or attach</span>
+          <span class="screen-step screen-step-green">Record</span>
+          <span class="screen-title">PDF Record</span>
+          <span class="screen-desc">Professional Gas Tightness Test Record generated instantly — ready to share or attach</span>
         </div>
       </div>
     </div>
@@ -634,7 +741,7 @@
         <div class="change-item">
           <div class="change-tag new-tag">New</div>
           <div class="change-content">
-            <h4>Caravans &amp; Light Agricultural Vehicles</h4>
+            <h4>Caravans and LAVs</h4>
             <p>Edition 4 extends scope to include caravans and LAVs for the first time, with dedicated test procedures and pressure limits.</p>
           </div>
         </div>
@@ -704,7 +811,7 @@
         <div class="expert-stat-icon">🏅</div>
         <div>
           <div class="expert-stat-num">20<span>+</span></div>
-          <div class="expert-stat-label">Years as senior Gas Safe inspectors, working on UK gas safety standards</div>
+          <div class="expert-stat-label">Gas Safe / CORGI inspectors</div>
         </div>
       </div>
       <div class="expert-stat">
@@ -801,7 +908,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Can I use the results as part of a gas safety record?<div class="faq-icon">+</div></div>
-        <div class="faq-a">The app produces an exportable results summary showing the procedure followed, readings taken, and the pass/fail outcome. This is designed to be attached to your certificate or retained as part of your job record. You remain responsible for completing your certificate in accordance with your registration body's requirements.</div>
+        <div class="faq-a">The app produces an exportable results summary showing the procedure followed, readings taken, and the pass/fail outcome. This is designed to be attached to your record or retained as part of your job record. You remain responsible for completing your record in accordance with your registration body's requirements.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is this a one-off payment or a subscription?<div class="faq-icon">+</div></div>
