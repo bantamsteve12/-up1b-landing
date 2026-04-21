@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — UP/1B Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0E14;
+    --surface: #0F1117;
+    --card: #13151E;
+    --card2: #1A1D2A;
+    --border: #252840;
+    --accent: #FF6B1A;
+    --accent-glow: rgba(255,107,26,0.28);
+    --accent-soft: rgba(255,107,26,0.12);
+    --accent-border: rgba(255,107,26,0.3);
+    --green: #22C55E;
+    --green-soft: rgba(34,197,94,0.12);
+    --green-border: rgba(34,197,94,0.3);
+    --white: #fff;
+    --grey1: rgba(230,232,240,0.85);
+    --grey2: #7880A0;
+    --font: 'Sora', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: var(--font); font-size: 16px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 62px; background: rgba(12,14,20,0.88); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-back { font-size: 13px; color: var(--grey2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--white); }
+  .nav-back svg { width: 14px; height: 14px; }
+
+  /* HERO */
+  .hero { padding: 120px 5vw 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,107,26,0.08) 0%, transparent 70%); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; position: relative; z-index: 1; margin-bottom: 16px; }
+  .hero p { font-size: 15px; color: var(--grey2); position: relative; z-index: 1; max-width: 480px; margin: 0 auto; }
+
+  /* LAYOUT */
+  .page-body { max-width: 900px; margin: 0 auto; padding: 0 5vw 100px; display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
+  @media (max-width: 768px) { .page-body { grid-template-columns: 1fr; } }
+
+  /* FORM CARD */
+  .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+  .form-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--grey2); text-transform: uppercase; letter-spacing: 0.8px; }
+  .field input, .field select, .field textarea {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--grey2); }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%237880A0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .field select option { background: #1A1D2A; }
+  .field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    margin-top: 4px;
+  }
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SUCCESS / ERROR */
+  .status-box { display: none; border-radius: 12px; padding: 16px 20px; margin-top: 20px; font-size: 14px; font-weight: 500; }
+  .status-box.success { display: block; background: var(--green-soft); border: 1px solid var(--green-border); color: var(--green); }
+  .status-box.error { display: block; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .info-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+  .info-card p { font-size: 13px; color: var(--grey2); line-height: 1.6; }
+  .info-card p + p { margin-top: 8px; }
+
+  .faq-mini { display: flex; flex-direction: column; gap: 1px; }
+  .faq-mini-item { background: var(--card2); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+  .faq-mini-q { padding: 14px 16px; font-size: 13px; font-weight: 600; color: var(--grey1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .faq-mini-q:hover { color: var(--white); }
+  .faq-mini-icon { color: var(--accent); font-size: 16px; font-weight: 300; transition: transform 0.2s; flex-shrink: 0; }
+  .faq-mini-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s; font-size: 13px; color: var(--grey2); line-height: 1.6; padding: 0 16px; }
+  .faq-mini-item.open .faq-mini-a { max-height: 200px; padding: 0 16px 14px; }
+  .faq-mini-item.open .faq-mini-icon { transform: rotate(45deg); }
+
+  .response-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--green); }
+  .response-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 32px 5vw; text-align: center; }
+  footer p { font-size: 13px; color: var(--grey2); }
+  footer a { color: var(--grey2); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">UP<span>/</span>1B Calculator</a>
+  <a class="nav-back" href="/">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">Support</div>
+  <h1>How can we help?</h1>
+  <p>Fill in the form and we'll get back to you as soon as possible.</p>
+</div>
+
+<div class="page-body">
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h2>Send a support request</h2>
+
+    <div class="field">
+      <label>Your name</label>
+      <input type="text" id="name" placeholder="John Smith" autocomplete="name">
+    </div>
+
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="email" placeholder="john@example.com" autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label>Subject</label>
+      <select id="subject">
+        <option value="" disabled selected>Select a topic…</option>
+        <option value="Account issue">Account issue</option>
+        <option value="Calculation query">Calculation query</option>
+        <option value="PDF record issue">PDF record issue</option>
+        <option value="App not working correctly">App not working correctly</option>
+        <option value="Android availability">Android availability</option>
+        <option value="Billing / purchase">Billing / purchase</option>
+        <option value="Feature request">Feature request</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Message</label>
+      <textarea id="message" placeholder="Describe your issue or question in as much detail as you can…"></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Send Request</button>
+
+    <div class="status-box" id="statusBox"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="info-card" style="text-align:center;">
+      <div class="response-badge" style="margin: 0 auto 12px;"><div class="response-dot"></div> Typically within 1 business day</div>
+      <p>We aim to respond to all support requests within one business day.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Common questions</h3>
+      <div class="faq-mini">
+
+        <div class="faq-mini-item">
+          <div class="faq-mini-q" onclick="toggleFaq(this)">I've lost access to my account<span class="faq-mini-icon">+</span></div>
+          <div class="faq-mini-a">Use the "Forgot password" option on the login screen. If you're still having trouble, send us a request above and we'll sort it out for you.</div>
+        </div>
+
+        <div class="faq-mini-item">
+          <div class="faq-mini-q" onclick="toggleFaq(this)">My PDF record won't generate<span class="faq-mini-icon">+</span></div>
+          <div class="faq-mini-a">Make sure you've completed all required steps and filled in the job details on the Certify screen. If the issue persists, contact us with your device model and OS version.</div>
+        </div>
+
+        <div class="faq-mini-item">
+          <div class="faq-mini-q" onclick="toggleFaq(this)">Is Android available yet?<span class="faq-mini-icon">+</span></div>
+          <div class="faq-mini-a">Android is coming very soon. We'll notify users when it launches on Google Play.</div>
+        </div>
+
+        <div class="faq-mini-item">
+          <div class="faq-mini-q" onclick="toggleFaq(this)">I was charged but can't access the app<span class="faq-mini-icon">+</span></div>
+          <div class="faq-mini-a">Purchases are processed by Apple or Google. Make sure you're signed in with the same Apple ID or Google account you used to purchase. If you're still stuck, send us a request above.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p><a href="/">UP/1B Calculator</a> &nbsp;·&nbsp; &copy; 2026 Gas Installers Workmate Ltd &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms.html">Terms of Use</a></p>
+</footer>
+
+<script>
+  const SUPABASE_URL = 'https://gmgcvswdffbvjfpzacuz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtZ2N2c3dkZmZidmpmcHphY3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NDc4NzIsImV4cCI6MjA5MjAyMzg3Mn0.JL7nB3mrMkcQQXZwW1uLrgSROFKy4mgeAK0PfkMENUY';
+
+  async function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+    const btn = document.getElementById('submitBtn');
+    const statusBox = document.getElementById('statusBox');
+
+    statusBox.className = 'status-box';
+    statusBox.textContent = '';
+
+    if (!name || !email || !subject || !message) {
+      statusBox.className = 'status-box error';
+      statusBox.textContent = 'Please fill in all fields before submitting.';
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      statusBox.className = 'status-box error';
+      statusBox.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/support_requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+
+      if (res.ok) {
+        statusBox.className = 'status-box success';
+        statusBox.textContent = '✓ Request sent — we\'ll be in touch within one business day.';
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('subject').value = '';
+        document.getElementById('message').value = '';
+        btn.textContent = 'Sent ✓';
+      } else {
+        const err = await res.json();
+        throw new Error(err.message || 'Unexpected error');
+      }
+    } catch (e) {
+      statusBox.className = 'status-box error';
+      statusBox.textContent = 'Something went wrong. Please try again or contact us directly.';
+      btn.disabled = false;
+      btn.textContent = 'Send Request';
+    }
+  }
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
