@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Your Account — UP/1B Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-41PM2YRZ2M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-41PM2YRZ2M");
+</script>
+</head>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0E14;
+    --surface: #0F1117;
+    --card: #13151E;
+    --card2: #1A1D2A;
+    --border: #252840;
+    --accent: #FF6B1A;
+    --accent-glow: rgba(255,107,26,0.28);
+    --accent-soft: rgba(255,107,26,0.12);
+    --accent-border: rgba(255,107,26,0.3);
+    --green: #22C55E;
+    --green-soft: rgba(34,197,94,0.12);
+    --green-border: rgba(34,197,94,0.3);
+    --red: #EF4444;
+    --red-soft: rgba(239,68,68,0.08);
+    --red-border: rgba(239,68,68,0.3);
+    --white: #fff;
+    --grey1: rgba(230,232,240,0.85);
+    --grey2: #7880A0;
+    --font: 'Sora', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: var(--font); font-size: 16px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 62px; background: rgba(12,14,20,0.88); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-back { font-size: 13px; color: var(--grey2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--white); }
+  .nav-back svg { width: 14px; height: 14px; }
+
+  /* HERO */
+  .hero { padding: 120px 5vw 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(239,68,68,0.06) 0%, transparent 70%); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--red-soft); border: 1px solid var(--red-border); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 500; color: var(--red); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; position: relative; z-index: 1; margin-bottom: 16px; }
+  .hero p { font-size: 15px; color: var(--grey2); position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+
+  /* CONTENT */
+  .content { max-width: 760px; margin: 0 auto; padding: 0 5vw 100px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+  .step { display: flex; gap: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; align-items: flex-start; transition: border-color 0.2s; }
+  .step:hover { border-color: var(--accent-border); }
+  .step-num { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; min-width: 36px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--accent); }
+  .step-body h3 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .step-body p { font-size: 14px; color: var(--grey2); line-height: 1.6; margin: 0; }
+  .step-body p strong { color: var(--grey1); }
+
+  /* DATA TABLE */
+  .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .data-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--grey2); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+  .data-table td { font-size: 14px; color: var(--grey1); padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; line-height: 1.5; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 20px; }
+  .tag-deleted { background: var(--red-soft); border: 1px solid var(--red-border); color: var(--red); }
+  .tag-retained { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: #F59E0B; }
+
+  .section-block { margin-bottom: 48px; }
+  .section-block h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-block h2 .icon { font-size: 18px; }
+  .section-block p { font-size: 15px; color: var(--grey1); margin-bottom: 12px; }
+
+  .highlight-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  .highlight-box.green { border-color: var(--green-border); background: var(--green-soft); }
+  .highlight-box.red { border-color: var(--red-border); background: var(--red-soft); }
+  .highlight-box p { margin: 0; font-size: 14px; color: var(--grey1); }
+  .highlight-box strong { color: var(--white); }
+
+  /* SUPPORT FORM LINK */
+  .support-cta { background: var(--card2); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; text-align: center; margin-top: 16px; }
+  .support-cta h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .support-cta p { font-size: 14px; color: var(--grey2); margin-bottom: 20px; }
+  .support-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; font-family: var(--font); font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 100px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 20px var(--accent-glow); }
+  .support-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 32px 5vw; text-align: center; }
+  footer p { font-size: 13px; color: var(--grey2); }
+  footer a { color: var(--grey2); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--white); }
+</style>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">UP<span>/</span>1B Calculator</a>
+  <a class="nav-back" href="/">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">Account Management</div>
+  <h1>Delete Your Account</h1>
+  <p>This page explains how to request deletion of your UP/1B Calculator account and what happens to your data when you do.</p>
+</div>
+
+<div class="content">
+
+  <div class="section-block">
+    <h2><span class="icon">🗑️</span> How to request account deletion</h2>
+    <p>You can request deletion of your account and all associated data at any time. Follow these steps:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Open the UP/1B Calculator app</h3>
+          <p>Launch the app on your iOS or Android device and make sure you are signed in to the account you wish to delete.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Go to Settings</h3>
+          <p>Tap the <strong>Profile</strong> or <strong>Settings</strong> icon in the app navigation. This is usually found in the bottom tab bar or the top-right menu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Select "Delete Account"</h3>
+          <p>Scroll to the bottom of the Settings screen and tap <strong>Delete Account</strong>. You will be asked to confirm your decision before anything is deleted.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Confirm deletion</h3>
+          <p>Tap <strong>Confirm Delete</strong> on the confirmation prompt. Your account and associated data will be permanently deleted within <strong>30 days</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box green">
+      <p>✓ &nbsp;<strong>Can't access the app?</strong> You can also request account deletion by submitting a request via our support page below. Include the email address associated with your account and we will process the deletion within 30 days.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2><span class="icon">📋</span> What data is deleted and what is kept</h2>
+    <p>The following table sets out what happens to each type of data when you request account deletion.</p>
+
+    <div class="highlight-box" style="padding: 0; overflow: hidden;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data type</th>
+            <th>What happens</th>
+            <th>Retention period</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Account credentials<br><span style="font-size:12px;color:var(--grey2)">Email address, encrypted password</span></td>
+            <td><span class="tag tag-deleted">Deleted</span></td>
+            <td>Deleted within 30 days of request</td>
+          </tr>
+          <tr>
+            <td>Engineer profile<br><span style="font-size:12px;color:var(--grey2)">Name, Gas Safe number, business details</span></td>
+            <td><span class="tag tag-deleted">Deleted</span></td>
+            <td>Deleted within 30 days of request</td>
+          </tr>
+          <tr>
+            <td>Test records<br><span style="font-size:12px;color:var(--grey2)">Saved tightness test and purging job summaries</span></td>
+            <td><span class="tag tag-deleted">Deleted</span></td>
+            <td>Deleted within 30 days of request</td>
+          </tr>
+          <tr>
+            <td>Support requests<br><span style="font-size:12px;color:var(--grey2)">Messages submitted via the support form</span></td>
+            <td><span class="tag tag-retained">Retained</span></td>
+            <td>Retained for up to 12 months for operational and legal compliance purposes, then permanently deleted</td>
+          </tr>
+          <tr>
+            <td>Purchase records<br><span style="font-size:12px;color:var(--grey2)">Transaction data held by Apple or Google</span></td>
+            <td><span class="tag tag-retained">Retained by Apple / Google</span></td>
+            <td>Governed by Apple's and Google's own retention policies — we do not hold this data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box red" style="margin-top: 16px;">
+      <p>⚠ &nbsp;<strong>Deletion is permanent.</strong> Once your account is deleted, your test records and profile data cannot be recovered. We recommend exporting any records you wish to keep before submitting a deletion request.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2><span class="icon">✉️</span> Request deletion via support</h2>
+    <p>If you are unable to delete your account from within the app, you can submit a deletion request directly to our support team. Please select <strong>"Account issue"</strong> as the subject and include the email address registered to your account.</p>
+    <div class="support-cta">
+      <h3>Gas Installers Workmate Ltd</h3>
+      <p>Developer of UP/1B Calculator — available on iOS App Store and Google Play</p>
+      <a class="support-btn" href="/support.html">Submit a deletion request →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="/">UP/1B Calculator</a> &nbsp;·&nbsp; &copy; 2026 Gas Installers Workmate Ltd &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="/support.html">Support</a></p>
+</footer>
+
+</body>
+</html>
