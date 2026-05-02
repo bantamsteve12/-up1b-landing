@@ -328,19 +328,7 @@
     .trust-divider { display: none; }
   }
 
-  /* ANDROID NOTIFY */
-  .android-notify { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 14px; padding: 14px 16px; margin-top: 12px; }
-  .android-notify-label { font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 10px; }
-  .android-notify-row { display: flex; gap: 8px; }
-  .android-notify-input { flex: 1; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-family: var(--font); font-size: 13px; color: var(--white); outline: none; transition: border-color 0.2s; }
-  .android-notify-input::placeholder { color: var(--grey2); }
-  .android-notify-input:focus { border-color: var(--green); }
-  .android-notify-btn { background: var(--green); color: #fff; font-family: var(--font); font-size: 13px; font-weight: 700; padding: 9px 16px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
-  .android-notify-btn:hover { opacity: 0.85; }
-  .android-notify-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .android-notify-status { font-size: 12px; margin-top: 8px; min-height: 16px; }
-  .android-notify-status.success { color: var(--green); }
-  .android-notify-status.error { color: #f87171; }
+
 </style>
 </head>
 <body>
@@ -494,7 +482,7 @@
 <div class="sticky-bar">
   <div class="sticky-bar-text">
     UP/1B Calculator
-    <span>IGEM/UP/1B Edition 4 · £8.99 early adopter price</span>
+    <span>IGEM/UP/1B Edition 4 · iOS &amp; Android · £8.99</span>
   </div>
   <a class="sticky-bar-btn" href="#pricing">Download</a>
 </div>
@@ -910,17 +898,20 @@
           </div>
         </a>
       </div>
-      <div class="android-notify" id="android-notify-pricing">
-        <div class="android-notify-label">🤖 Android coming soon — get notified</div>
-        <div class="android-notify-row">
-          <input class="android-notify-input" type="email" placeholder="your@email.com" id="android-email-pricing">
-          <button class="android-notify-btn" onclick="notifyAndroid('pricing')">Notify me</button>
-        </div>
-        <div class="android-notify-status" id="android-status-pricing"></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=uk.co.gassafeguide.gastest" target="_blank" rel="noopener">
+          <div class="store-badge-icon">
+            <svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 1.08a2 2 0 0 0-.5 1.4v25.04a2 2 0 0 0 .5 1.4l.07.07 14.03-14.03v-.33L1.57 1.01l-.07.07z" fill="#4FC3F7"/>
+              <path d="M20.27 19.77l-4.67-4.67v-.33l4.67-4.67.11.06 5.54 3.15c1.58.9 1.58 2.36 0 3.26l-5.54 3.14-.11.06z" fill="#FFCA28"/>
+              <path d="M20.38 19.71L15.6 14.94 1.5 29.04c.52.55 1.38.62 2.35.07l16.53-9.4" fill="#F44336"/>
+              <path d="M20.38 10.17L3.85.77C2.88.22 2.02.29 1.5.84l14.1 14.1 4.78-4.77z" fill="#4CAF50"/>
+            </svg>
+          </div>
+          <div class="store-badge-text">
+            <span class="store-badge-sub">Get it on</span>
+            <span class="store-badge-name">Google Play</span>
+          </div>
+        </a>
 
 <!-- FAQ -->
 <section class="faq" id="faq">
@@ -952,7 +943,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Is it available on Android?<div class="faq-icon">+</div></div>
-        <div class="faq-a">Android is coming very soon. The app is currently available on iOS via the App Store, and the Android version will be available on Google Play shortly.</div>
+        <div class="faq-a">Yes — UP/1B Calculator is available on both iOS and Android. Download on the App Store or get it on Google Play.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Does the app replace my knowledge of the standard?<div class="faq-icon">+</div></div>
@@ -993,7 +984,7 @@
           <span class="store-badge-name">App Store</span>
         </div>
       </a>
-      <a class="store-badge" href="#" style="min-width:220px">
+      <a class="store-badge" href="https://play.google.com/store/apps/details?id=uk.co.gassafeguide.gastest" target="_blank" rel="noopener" style="min-width:220px">
         <div class="store-badge-icon">
           <svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.5 1.08a2 2 0 0 0-.5 1.4v25.04a2 2 0 0 0 .5 1.4l.07.07 14.03-14.03v-.33L1.57 1.01l-.07.07z" fill="#4FC3F7"/>
@@ -1003,18 +994,10 @@
           </svg>
         </div>
         <div class="store-badge-text">
-          <span class="store-badge-sub">Coming soon to</span>
+          <span class="store-badge-sub">Get it on</span>
           <span class="store-badge-name">Google Play</span>
         </div>
       </a>
-    </div>
-    <div class="android-notify" id="android-notify-cta" style="max-width:460px; margin: 16px auto 0;">
-      <div class="android-notify-label">🤖 Android coming soon — get notified at launch</div>
-      <div class="android-notify-row">
-        <input class="android-notify-input" type="email" placeholder="your@email.com" id="android-email-cta">
-        <button class="android-notify-btn" onclick="notifyAndroid('cta')">Notify me</button>
-      </div>
-      <div class="android-notify-status" id="android-status-cta"></div>
     </div>
   </div>
 </section>
